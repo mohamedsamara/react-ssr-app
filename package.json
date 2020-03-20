@@ -5,10 +5,11 @@
   "main": "server/index.js",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "cross-env NODE_ENV=production webpack --mode=production  --config webpack/webpack.prod.js  --progress --colors",
-    "start": "cross-env NODE_ENV=development nodemon server",
-    "start:production": "cross-env NODE_ENV=production node server",
-    "production": "npm run clean && npm run build",
+    "build:client": "webpack --mode=production  --config webpack/client/webpack.prod.js --color --progress",
+    "build:server": "webpack --mode=production --config webpack/server/webpack.prod.js",
+    "start": "cross-env NODE_ENV=development nodemon --exec webpack --mode=development --config webpack/server/webpack.dev.js",
+    "start:production": "cross-env NODE_ENV=production node index.js",
+    "production": "npm run clean && npm run build:client && npm run build:server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
