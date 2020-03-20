@@ -1,0 +1,25 @@
+{
+  "name": "react-ssr-app",
+  "version": "1.0.0",
+  "description": "React SSR Application",
+  "main": "server/index.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "cross-env NODE_ENV=production webpack --mode=production  --config webpack/webpack.prod.js  --progress --colors",
+    "start": "cross-env NODE_ENV=development nodemon server",
+    "start:production": "cross-env NODE_ENV=production node server",
+    "production": "npm run clean && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohamedsamara/react-ssr-app.git"
+  },
+  "keywords": [],
+  "author": "Mohamed Samara (https://github.com/mohamedsamara)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mohamedsamara/react-ssr-app/issues"
+  },
+  "homepage": "https://github.com/mohamedsamara/react-ssr-app#readme"
+}
