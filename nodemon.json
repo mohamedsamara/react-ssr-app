@@ -3,5 +3,6 @@
   "env": {
     "NODE_ENV": ["development"]
   },
-  "watch": ["./server"]
+  "watch": ["./server"],
+  "exec": "cross-env NODE_ENV=development webpack --mode=development --config webpack/server/webpack.common.js && node index"
 }
