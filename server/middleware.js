@@ -3,12 +3,13 @@ import express from "express";
 import webpack from "webpack";
 import webpackMiddleware from "webpack-dev-middleware";
 import webpackHotMiddleware from "webpack-hot-middleware";
-import historyApiFallback from "connect-history-api-fallback";
+// import historyApiFallback from "connect-history-api-fallback";
 
 // SSR Imports
 import React from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
+import Helmet from "react-helmet";
 
 import Router from "../client/app/router";
 import Application from "../client/app/components/Application";
@@ -24,12 +25,6 @@ const middleware = app => {
 
   if (process.env.NODE_ENV === "development") {
     const compiler = webpack(webpackConfig);
-
-    // app.use(
-    //   historyApiFallback({
-    //     verbose: false
-    //   })
-    // );
 
     app.use(
       webpackMiddleware(compiler, {
@@ -55,10 +50,16 @@ const middleware = app => {
         </StaticRouter>
       );
 
+      const helmet = Helmet.renderStatic();
+      const meta = `
+        ${helmet.meta.toString()}
+        ${helmet.title.toString()}
+      `.trim();
+
       res
         .set("Content-Type", "text/html")
         .status(200)
-        .end(Template(body, js, css));
+        .end(Template(body, js, css, meta));
     });
   } else {
     (async () => {
@@ -80,10 +81,16 @@ const middleware = app => {
           </StaticRouter>
         );
 
+        const helmet = Helmet.renderStatic();
+        const meta = `
+          ${helmet.meta.toString()}
+          ${helmet.title.toString()}
+        `.trim();
+
         res
           .set("Content-Type", "text/html")
           .status(200)
-          .end(Template(body, js, css));
+          .end(Template(body, js, css, meta));
       });
     })();
   }

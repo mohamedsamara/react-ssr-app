@@ -1,6 +1,6 @@
 /*eslint arrow-body-style: 0, max-len: 0 */
 
-const Template = (body, js, css) => {
+const Template = (body, js, css, meta) => {
   return `
       <!DOCTYPE html>
       <html lang="en">
@@ -8,8 +8,7 @@ const Template = (body, js, css) => {
           <meta charset="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-          <meta name="description" content="React SSR Application" />
-          <title>React SSR Application</title>
+          ${meta}
           <link rel="icon" href="/public/images/favicon.ico" />
           ${
             process.env.NODE_ENV === "production"
