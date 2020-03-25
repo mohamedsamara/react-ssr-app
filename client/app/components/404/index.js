@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import Head from "../Head";
+import Head from '../Head';
 
 const Page404 = () => {
   return (

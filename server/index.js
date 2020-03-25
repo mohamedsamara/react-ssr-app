@@ -1,10 +1,10 @@
-import "dotenv/config";
-import express from "express";
-import chalk from "chalk";
-import cors from "cors";
-import compression from "compression";
+import 'dotenv/config';
+import express from 'express';
+import chalk from 'chalk';
+import cors from 'cors';
+import compression from 'compression';
 
-import middleware from "./middleware";
+import middleware from './middleware';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,8 +21,8 @@ middleware(app);
 // Starting the server
 app.listen(PORT, () => {
   console.log(
-    `${chalk.green("✓")} ${chalk.blue(
-      `Listening on port ${PORT}. Visit http://localhost:${PORT}/ in your browser.`
-    )}`
+    `${chalk.green('✓')} ${chalk.blue(
+      `Listening on port ${PORT}. Visit http://localhost:${PORT}/ in your browser.`,
+    )}`,
   );
 });

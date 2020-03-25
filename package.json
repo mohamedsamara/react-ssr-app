@@ -10,6 +10,8 @@
     "start": "npm run clean && nodemon",
     "start:production": "cross-env NODE_ENV=production node index.js",
     "production": "npm run clean && npm run build:client && npm run build:server",
+    "lint": "eslint **/*.js --ignore-path .eslintignore",
+    "lint:fix": "eslint **/*.js --fix --ignore-path .eslintignore",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

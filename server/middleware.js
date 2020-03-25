@@ -1,44 +1,44 @@
-import path from "path";
-import express from "express";
-import webpack from "webpack";
-import webpackMiddleware from "webpack-dev-middleware";
-import webpackHotMiddleware from "webpack-hot-middleware";
+import path from 'path';
+import express from 'express';
+import webpack from 'webpack';
+import webpackMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
 // import historyApiFallback from "connect-history-api-fallback";
 
 // SSR Imports
-import React from "react";
-import { renderToString } from "react-dom/server";
-import { StaticRouter } from "react-router-dom";
-import Helmet from "react-helmet";
+import React from 'react';
+import { renderToString } from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom';
+import Helmet from 'react-helmet';
 
-import Router from "../client/app/router";
-import Application from "../client/app/components/Application";
+import Router from '../client/app/router';
+import Application from '../client/app/components/Application';
 
 // eslint-disable-next-line import/no-unresolved
-import webpackConfig from "./../webpack/client/webpack.dev";
+import webpackConfig from '../webpack/client/webpack.dev';
 
-import Template from "./views/template";
-import extractChunks from "./utils/chunks";
+import Template from './views/template';
+import extractChunks from './utils/chunks';
 
 const middleware = app => {
-  app.use("/public", express.static(path.resolve(__dirname, "../client")));
+  app.use('/public', express.static(path.resolve(__dirname, '../client')));
 
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV === 'development') {
     const compiler = webpack(webpackConfig);
 
     app.use(
       webpackMiddleware(compiler, {
         publicPath: webpackConfig.output.publicPath,
         writeToDisk: true,
-        serverSideRender: true
-      })
+        serverSideRender: true,
+      }),
     );
 
     app.use(webpackHotMiddleware(compiler));
 
-    app.get("*", (req, res) => {
+    app.get('*', (req, res) => {
       const [js, css] = extractChunks(
-        res.locals.webpackStats.toJson().assetsByChunkName
+        res.locals.webpackStats.toJson().assetsByChunkName,
       );
 
       const context = {};
@@ -47,7 +47,7 @@ const middleware = app => {
           <Application>
             <Router />
           </Application>
-        </StaticRouter>
+        </StaticRouter>,
       );
 
       const helmet = Helmet.renderStatic();
@@ -57,19 +57,19 @@ const middleware = app => {
       `.trim();
 
       res
-        .set("Content-Type", "text/html")
+        .set('Content-Type', 'text/html')
         .status(200)
         .end(Template(body, js, css, meta));
     });
   } else {
     (async () => {
       let assets = await import(
-        /* webpackMode: "eager" */ "./../build/client/chunk-manifest.json"
+        /* webpackMode: "eager" */ './../build/client/chunk-manifest.json'
       );
 
       assets = JSON.parse(JSON.stringify(assets.default));
 
-      app.get("*", (req, res) => {
+      app.get('*', (req, res) => {
         const [js, css] = extractChunks(assets);
 
         const context = {};
@@ -78,7 +78,7 @@ const middleware = app => {
             <Application>
               <Router />
             </Application>
-          </StaticRouter>
+          </StaticRouter>,
         );
 
         const helmet = Helmet.renderStatic();
@@ -88,7 +88,7 @@ const middleware = app => {
         `.trim();
 
         res
-          .set("Content-Type", "text/html")
+          .set('Content-Type', 'text/html')
           .status(200)
           .end(Template(body, js, css, meta));
       });

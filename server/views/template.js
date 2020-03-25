@@ -1,4 +1,4 @@
-/*eslint arrow-body-style: 0, max-len: 0 */
+/* eslint arrow-body-style: 0, max-len: 0 */
 
 const Template = (body, js, css, meta) => {
   return `
@@ -11,15 +11,15 @@ const Template = (body, js, css, meta) => {
           ${meta}
           <link rel="icon" href="/public/images/favicon.ico" />
           ${
-            process.env.NODE_ENV === "production"
+            process.env.NODE_ENV === 'production'
               ? "<link rel='manifest' href='/public/manifest.webmanifest' />"
-              : ""
+              : ''
           } 
-          ${css.map(path => `<link href="${path}"/>`).join("\n")}
+          ${css.map(path => `<link href="${path}"/>`).join('\n')}
         </head>
         <body>
           <div id="root">${body}</div>
-          ${js.map(path => `<script src="${path}"></script>`).join("\n")} 
+          ${js.map(path => `<script src="${path}"></script>`).join('\n')} 
         </body>
       </html>
     `;
