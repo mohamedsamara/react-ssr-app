@@ -7,7 +7,6 @@ const merge = require("webpack-merge");
 const { HashedModuleIdsPlugin } = require("webpack");
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
@@ -20,7 +19,7 @@ module.exports = merge(common, {
   output: {
     path: path.join(CURRENT_WORKING_DIR, "build/client"),
     filename: "js/[name].[chunkhash].js",
-    publicPath: "/"
+    publicPath: "/public/"
   },
   devtool: "source-map",
   module: {
@@ -115,26 +114,11 @@ module.exports = merge(common, {
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.join(CURRENT_WORKING_DIR, "client/public/index.html"),
-      inject: true,
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeRedundantAttributes: true,
-        useShortDoctype: true,
-        removeEmptyAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        keepClosingSlash: true,
-        minifyJS: true,
-        minifyCSS: true,
-        minifyURLs: true
-      }
-    }),
     new MiniCssExtractPlugin({
       filename: "css/[name].[hash].css"
     }),
     new WebpackPwaManifest({
+      filename: "manifest.webmanifest",
       name: "React SSR Application",
       short_name: "ReactSSR",
       description: "React SSR Application!",

@@ -4,5 +4,5 @@
     "NODE_ENV": ["development"]
   },
   "watch": ["./server"],
-  "exec": "cross-env NODE_ENV=development webpack --mode=development --config webpack/server/webpack.common.js && node index"
+  "exec": "cross-env NODE_ENV=development webpack --mode=development --config webpack/server/webpack.common.js && cross-env NODE_ENV=development node index"
 }

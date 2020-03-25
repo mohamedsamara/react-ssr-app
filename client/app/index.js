@@ -1,6 +1,13 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { render, hydrate } from "react-dom";
+
+import App from "./app";
 
 const rootElement = document.getElementById("root");
 
-ReactDOM.render(<div>React Works</div>, rootElement);
+// Fix: Expected server HTML to contain a matching <a> in
+// const renderMethod = module.hot ? render : hydrate;
+
+// renderMethod(<App />, document.getElementById("root"));
+
+hydrate(<App />, rootElement);

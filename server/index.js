@@ -11,16 +11,12 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// app.use(routes);
 app.use(cors());
 app.use(compression());
+// app.use(routes);
 
 // setup middleware
 middleware(app);
-
-app.use((req, res) => {
-  res.json(400, "Your request could not be processed. Please try again.");
-});
 
 // Starting the server
 app.listen(PORT, () => {

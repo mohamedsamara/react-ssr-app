@@ -5,6 +5,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const ManifestPlugin = require("webpack-manifest-plugin");
 
 const NODE_ENV = process.env.NODE_ENV;
 const CURRENT_WORKING_DIR = process.cwd();
@@ -29,6 +30,10 @@ module.exports = {
         NODE_ENV: JSON.stringify(NODE_ENV)
       }
     }),
-    new CopyWebpackPlugin([{ from: "client/public" }])
+    new CopyWebpackPlugin([{ from: "client/public" }]),
+    new ManifestPlugin({
+      fileName: "chunk-manifest.json",
+      basePath: "/"
+    })
   ]
 };

@@ -5,31 +5,87 @@ import webpackMiddleware from "webpack-dev-middleware";
 import webpackHotMiddleware from "webpack-hot-middleware";
 import historyApiFallback from "connect-history-api-fallback";
 
+// SSR Imports
+import React from "react";
+import { renderToString } from "react-dom/server";
+import { StaticRouter } from "react-router-dom";
+
+import Router from "../client/app/router";
+import Application from "../client/app/components/Application";
+
 // eslint-disable-next-line import/no-unresolved
 import webpackConfig from "./../webpack/client/webpack.dev";
 
+import Template from "./views/template";
+import extractChunks from "./utils/chunks";
+
 const middleware = app => {
+  app.use("/public", express.static(path.resolve(__dirname, "../client")));
+
   if (process.env.NODE_ENV === "development") {
     const compiler = webpack(webpackConfig);
 
-    app.use(
-      historyApiFallback({
-        verbose: false
-      })
-    );
+    // app.use(
+    //   historyApiFallback({
+    //     verbose: false
+    //   })
+    // );
 
     app.use(
       webpackMiddleware(compiler, {
-        publicPath: webpackConfig.output.publicPath
+        publicPath: webpackConfig.output.publicPath,
+        writeToDisk: true,
+        serverSideRender: true
       })
     );
 
     app.use(webpackHotMiddleware(compiler));
-  } else {
-    app.use(express.static(path.resolve(__dirname, "../client")));
+
     app.get("*", (req, res) => {
-      res.sendFile(path.resolve(__dirname, "../client/index.html"));
+      const [js, css] = extractChunks(
+        res.locals.webpackStats.toJson().assetsByChunkName
+      );
+
+      const context = {};
+      const body = renderToString(
+        <StaticRouter location={req.originalUrl} context={context}>
+          <Application>
+            <Router />
+          </Application>
+        </StaticRouter>
+      );
+
+      res
+        .set("Content-Type", "text/html")
+        .status(200)
+        .end(Template(body, js, css));
     });
+  } else {
+    (async () => {
+      let assets = await import(
+        /* webpackMode: "eager" */ "./../build/client/chunk-manifest.json"
+      );
+
+      assets = JSON.parse(JSON.stringify(assets.default));
+
+      app.get("*", (req, res) => {
+        const [js, css] = extractChunks(assets);
+
+        const context = {};
+        const body = renderToString(
+          <StaticRouter location={req.originalUrl} context={context}>
+            <Application>
+              <Router />
+            </Application>
+          </StaticRouter>
+        );
+
+        res
+          .set("Content-Type", "text/html")
+          .status(200)
+          .end(Template(body, js, css));
+      });
+    })();
   }
 };
 

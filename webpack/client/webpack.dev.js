@@ -5,7 +5,6 @@
 const path = require("path");
 const webpack = require("webpack");
 const merge = require("webpack-merge");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const common = require("./webpack.common");
 
@@ -69,27 +68,12 @@ module.exports = merge(common, {
             }
           }
         ]
-      },
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: "html-loader"
-          }
-        ]
       }
     ]
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({
-      template: path.join(CURRENT_WORKING_DIR, "client/public/index.html"),
-      inject: true
-    })
-  ],
+  plugins: [new webpack.HotModuleReplacementPlugin()],
   devServer: {
     port: 3000,
-    open: true,
     inline: true,
     compress: true,
     noInfo: false,

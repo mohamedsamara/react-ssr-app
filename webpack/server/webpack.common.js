@@ -3,6 +3,7 @@
 
 const path = require("path");
 const webpack = require("webpack");
+const dotenv = require("dotenv-webpack");
 const nodeExternals = require("webpack-node-externals");
 
 const CURRENT_WORKING_DIR = process.cwd();
@@ -33,6 +34,10 @@ module.exports = {
   },
   externals: [nodeExternals()],
   plugins: [
+    new dotenv(),
+    new webpack.ProvidePlugin({
+      React: "react"
+    }),
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
