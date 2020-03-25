@@ -12,6 +12,8 @@
     "production": "npm run clean && npm run build:client && npm run build:server",
     "lint": "eslint **/*.js --ignore-path .eslintignore",
     "lint:fix": "eslint **/*.js --fix --ignore-path .eslintignore",
+    "prettier": "prettier **/*.{js,jsx,json,css,md} --write",
+    "precommit": "lint-staged",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -56,6 +58,8 @@
     "file-loader": "^4.2.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.9",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.13.0",
     "nodemon": "^2.0.2",
