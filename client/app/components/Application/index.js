@@ -1,11 +1,13 @@
 import React from 'react';
 
+import Header from '../Header';
+
 const Application = ({ children }) => {
   return (
     <>
       <div className="application">
-        <header>Header</header>
-        {children}
+        <Header />
+        <main className="main">{children}</main>
       </div>
     </>
   );

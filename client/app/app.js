@@ -6,12 +6,19 @@ import Router from './router';
 
 import Application from './components/Application';
 
+// Import application sass styles
+import './styles/sass/style.scss';
+
+// Import application css styles
+import './styles/css/style.css';
+
+// Import Tailwind css
+import './styles/css/tailwind.css';
+
 const App = () => {
   return (
     <BrowserRouter>
-      <Application>
-        <Router />
-      </Application>
+      <Router />
     </BrowserRouter>
   );
 };

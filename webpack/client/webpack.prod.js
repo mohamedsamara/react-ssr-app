@@ -1,27 +1,27 @@
 /* eslint-disable */
 
-"use strict";
+'use strict';
 
-const path = require("path");
-const merge = require("webpack-merge");
-const { HashedModuleIdsPlugin } = require("webpack");
-const TerserPlugin = require("terser-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const WebpackPwaManifest = require("webpack-pwa-manifest");
-const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const path = require('path');
+const merge = require('webpack-merge');
+const { HashedModuleIdsPlugin } = require('webpack');
+const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-const common = require("./webpack.common");
+const common = require('./webpack.common');
 
 const CURRENT_WORKING_DIR = process.cwd();
 
 module.exports = merge(common, {
-  mode: "production",
+  mode: 'production',
   output: {
-    path: path.join(CURRENT_WORKING_DIR, "build/client"),
-    filename: "js/[name].[chunkhash].js",
-    publicPath: "/public/"
+    path: path.join(CURRENT_WORKING_DIR, 'build/client'),
+    filename: 'js/[name].[chunkhash].js',
+    publicPath: '/public/',
   },
-  devtool: "source-map",
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -29,69 +29,69 @@ module.exports = merge(common, {
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: "css-loader"
+            loader: 'css-loader',
           },
           {
-            loader: "postcss-loader"
+            loader: 'postcss-loader',
           },
           {
-            loader: "sass-loader"
-          }
-        ]
+            loader: 'sass-loader',
+          },
+        ],
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|ico)$/,
         use: [
           {
-            loader: "file-loader",
+            loader: 'file-loader',
             options: {
-              outputPath: "images",
-              publicPath: "images",
-              name: "[name].[hash].[ext]"
-            }
-          }
-        ]
+              outputPath: 'images',
+              publicPath: 'images',
+              name: '[name].[hash].[ext]',
+            },
+          },
+        ],
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         use: [
           {
-            loader: "file-loader",
+            loader: 'file-loader',
             options: {
-              outputPath: "fonts",
-              publicPath: "../fonts",
-              name: "[name].[hash].[ext]"
-            }
-          }
-        ]
-      }
-    ]
+              outputPath: 'fonts',
+              publicPath: '../fonts',
+              name: '[name].[hash].[ext]',
+            },
+          },
+        ],
+      },
+    ],
   },
   performance: {
     hints: false,
     maxEntrypointSize: 512000,
-    maxAssetSize: 512000
+    maxAssetSize: 512000,
   },
   optimization: {
     minimize: true,
-    nodeEnv: "production",
+    nodeEnv: 'production',
     sideEffects: true,
     concatenateModules: true,
-    runtimeChunk: "single",
+    runtimeChunk: 'single',
     splitChunks: {
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
-          name: "vendors",
-          chunks: "all"
+          name: 'vendors',
+          chunks: 'all',
         },
         styles: {
           test: /\.css$/,
-          name: "styles",
-          chunks: "all",
-          enforce: true
-        }
-      }
+          name: 'styles',
+          chunks: 'all',
+          enforce: true,
+        },
+      },
     },
     minimizer: [
       new TerserPlugin({
@@ -101,50 +101,50 @@ module.exports = merge(common, {
         terserOptions: {
           warnings: false,
           compress: {
-            comparisons: false
+            comparisons: false,
           },
           parse: {},
           mangle: true,
           output: {
             comments: false,
-            ascii_only: true
-          }
-        }
-      })
-    ]
+            ascii_only: true,
+          },
+        },
+      }),
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "css/[name].[hash].css"
+      filename: 'css/[name].[hash].css',
     }),
     new WebpackPwaManifest({
-      filename: "manifest.webmanifest",
-      name: "React SSR Application",
-      short_name: "ReactSSR",
-      description: "React SSR Application!",
-      background_color: "#fff",
-      theme_color: "#4a68aa",
+      filename: 'manifest.webmanifest',
+      name: 'React SSR Application',
+      short_name: 'ReactSSR',
+      description: 'React SSR Application!',
+      background_color: '#fff',
+      theme_color: '#4a68aa',
       inject: true,
       ios: true,
       icons: [
         {
-          src: path.resolve("client/public/images/pwa.png"),
-          destination: "images",
-          sizes: [72, 96, 128, 144, 192, 384, 512]
+          src: path.resolve('client/public/images/pwa.png'),
+          destination: 'images',
+          sizes: [72, 96, 128, 144, 192, 384, 512],
         },
         {
-          src: path.resolve("client/public/images/pwa.png"),
+          src: path.resolve('client/public/images/pwa.png'),
           sizes: [120, 152, 167, 180],
-          destination: "images",
-          ios: true
-        }
-      ]
+          destination: 'images',
+          ios: true,
+        },
+      ],
     }),
     new OptimizeCssAssetsPlugin({}),
     new HashedModuleIdsPlugin({
-      hashFunction: "sha256",
-      hashDigest: "hex",
-      hashDigestLength: 20
-    })
-  ]
+      hashFunction: 'sha256',
+      hashDigest: 'hex',
+      hashDigestLength: 20,
+    }),
+  ],
 });

@@ -4,10 +4,14 @@ import Head from '../Head';
 
 const Homepage = () => {
   return (
-    <>
+    <div className="homepage">
       <Head title="Homepage" description="Homepage, Landing Page" />
-      Homepage
-    </>
+      <img
+        className="bg"
+        src="/images/background.svg"
+        alt="homepage background"
+      />
+    </div>
   );
 };
 

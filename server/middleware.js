@@ -13,6 +13,7 @@ import Helmet from 'react-helmet';
 
 import Router from '../client/app/router';
 import Application from '../client/app/components/Application';
+import Header from '../client/app/components/Header';
 
 // eslint-disable-next-line import/no-unresolved
 import webpackConfig from '../webpack/client/webpack.dev';
@@ -44,9 +45,7 @@ const middleware = app => {
       const context = {};
       const body = renderToString(
         <StaticRouter location={req.originalUrl} context={context}>
-          <Application>
-            <Router />
-          </Application>
+          <Router />
         </StaticRouter>,
       );
 

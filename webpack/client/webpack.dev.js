@@ -1,75 +1,75 @@
 /* eslint-disable */
 
-"use strict";
+'use strict';
 
-const path = require("path");
-const webpack = require("webpack");
-const merge = require("webpack-merge");
+const path = require('path');
+const webpack = require('webpack');
+const merge = require('webpack-merge');
 
-const common = require("./webpack.common");
+const common = require('./webpack.common');
 
 const CURRENT_WORKING_DIR = process.cwd();
 
 module.exports = merge(common, {
-  mode: "development",
-  entry: ["webpack-hot-middleware/client?reload=true"],
+  mode: 'development',
+  entry: ['webpack-hot-middleware/client?reload=true'],
   output: {
-    path: path.join(CURRENT_WORKING_DIR, "build/client"),
-    filename: "[name].js",
-    publicPath: "/"
+    path: path.join(CURRENT_WORKING_DIR, 'build/client'),
+    filename: '[name].js',
+    publicPath: '/',
   },
-  devtool: "cheap-module-eval-source-map",
+  devtool: 'cheap-module-eval-source-map',
   module: {
     rules: [
       {
         test: /\.(scss|sass|css)$/,
         use: [
-          "style-loader",
+          'style-loader',
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
-              sourceMap: true
-            }
+              sourceMap: true,
+            },
           },
           {
-            loader: "postcss-loader",
+            loader: 'postcss-loader',
             options: {
-              sourceMap: true
-            }
+              sourceMap: true,
+            },
           },
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
-              sourceMap: true
-            }
-          }
-        ]
+              sourceMap: true,
+            },
+          },
+        ],
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|ico)$/,
         use: [
           {
-            loader: "file-loader",
+            loader: 'file-loader',
             options: {
-              outputPath: "images",
-              name: "[name].[ext]"
-            }
-          }
-        ]
+              outputPath: 'images',
+              name: '[name].[ext]',
+            },
+          },
+        ],
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         use: [
           {
-            loader: "file-loader",
+            loader: 'file-loader',
             options: {
-              outputPath: "fonts",
-              name: "[name].[ext]"
-            }
-          }
-        ]
-      }
-    ]
+              outputPath: 'fonts',
+              name: '[name].[ext]',
+            },
+          },
+        ],
+      },
+    ],
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
   devServer: {
@@ -86,7 +86,7 @@ module.exports = merge(common, {
       timings: true,
       chunks: false,
       chunkModules: false,
-      modules: false
-    }
-  }
+      modules: false,
+    },
+  },
 });
