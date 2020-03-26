@@ -10,4 +10,12 @@ const rootElement = document.getElementById('root');
 
 // renderMethod(<App />, document.getElementById("root"));
 
-hydrate(<App />, rootElement);
+const renderMethod = module.hot ? render : hydrate;
+
+if (module.hot) {
+  module.hot.accept('./router', () => {
+    renderMethod();
+  });
+}
+
+renderMethod(<App />, rootElement);

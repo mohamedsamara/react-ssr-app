@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap');
+
+::selection {
+  background-color: #fff;
+  color: #fff;
+}
+
+html,
+body {
+  min-height: 100vh;
+  overflow: auto;
+}
+
+html {
+  font-size: 14px;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #2d3748;
+  background-size: cover;
+  letter-spacing: 0.05rem;
+}
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: 'Ubuntu Condensed', sans-serif;
+}
+
+a {
+  color: #fff;
+  transition: color 0.4;
+}
+
+a:hover {
+  color: #ccc;
+}
+
+#root,
+.application {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+
+/* responsive styles */
+@media (min-width: 576px) {
+  html {
+    font-size: 16px;
+  }
+
+  .main {
+    max-width: 420px;
+  }
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 17px;
+  }
+  .main {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  html {
+    font-size: 18px;
+  }
+  .main {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  html {
+    font-size: 19px;
+  }
+  .main {
+    max-width: 1140px;
+  }
+}
