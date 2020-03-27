@@ -22,7 +22,7 @@ import Template from './views/template';
 import extractChunks from './utils/chunks';
 
 const middleware = app => {
-  app.use('/public', express.static(path.resolve(__dirname, '../client')));
+  app.use('/assets', express.static(path.resolve(__dirname, '../client')));
 
   if (process.env.NODE_ENV === 'development') {
     const compiler = webpack(webpackConfig);

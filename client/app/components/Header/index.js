@@ -42,13 +42,13 @@ const Header = () => {
           <div className="inner-nav text-sm lg:flex-grow">
             <Link
               to="/"
-              className="px-2 py-1 text-white font-semibold rounded hover:bg-gray-800"
+              className="px-2 py-1 md:py-2 text-white font-semibold rounded hover:bg-gray-800"
             >
               Home
             </Link>
             <Link
               to="/about"
-              className="px-2 py-1 text-white font-semibold rounded hover:bg-gray-800"
+              className="px-2 py-1 md:py-2 text-white font-semibold rounded hover:bg-gray-800"
             >
               About
             </Link>

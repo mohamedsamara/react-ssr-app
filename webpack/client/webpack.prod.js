@@ -19,13 +19,13 @@ module.exports = merge(common, {
   output: {
     path: path.join(CURRENT_WORKING_DIR, 'build/client'),
     filename: 'js/[name].[chunkhash].js',
-    publicPath: '/public/',
+    publicPath: '/assets/',
   },
   devtool: 'source-map',
   module: {
     rules: [
       {
-        test: /\.(scss|sass|css)$/,
+        test: /\.(scss|sass)$/,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -36,6 +36,18 @@ module.exports = merge(common, {
           },
           {
             loader: 'sass-loader',
+          },
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'postcss-loader',
           },
         ],
       },
@@ -84,12 +96,6 @@ module.exports = merge(common, {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendors',
           chunks: 'all',
-        },
-        styles: {
-          test: /\.css$/,
-          name: 'styles',
-          chunks: 'all',
-          enforce: true,
         },
       },
     },

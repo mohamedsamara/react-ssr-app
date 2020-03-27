@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap');
 
 ::selection {
-  background-color: #fff;
+  background-color: #232bd0;
   color: #fff;
 }
 
@@ -60,12 +60,7 @@ a:hover {
 }
 
 .main {
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
   flex: 1 0 auto;
-  align-items: center;
-  justify-content: center;
 }
 
 /* responsive styles */
@@ -73,35 +68,28 @@ a:hover {
   html {
     font-size: 16px;
   }
+}
 
-  .main {
-    max-width: 420px;
+@media (min-width: 640px) {
+  html {
+    font-size: 17px;
   }
 }
 
 @media (min-width: 768px) {
   html {
-    font-size: 17px;
-  }
-  .main {
-    max-width: 720px;
-  }
-}
-
-@media (min-width: 992px) {
-  html {
     font-size: 18px;
   }
-  .main {
-    max-width: 960px;
-  }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1024px) {
   html {
     font-size: 19px;
   }
-  .main {
-    max-width: 1140px;
+}
+
+@media (min-width: 1280px) {
+  html {
+    font-size: 20px;
   }
 }
