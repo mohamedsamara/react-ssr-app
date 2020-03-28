@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 import styled from 'styled-components';
+import tw from 'tailwind.macro';
 
 const Draggable = ({ children, position, radius }) => {
   const [state, setState] = useState({
@@ -77,9 +78,7 @@ const Container = styled.div.attrs(({ x, y, radius }) => ({
     transform: `translate(${x - radius}px, ${y - radius}px)`,
   },
 }))`
-  @media (min-width: 1024px) {
-    position: absolute;
-  }
+  ${tw`lg:absolute`};
 
   ${({ isDragging }) =>
     isDragging
