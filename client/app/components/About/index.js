@@ -1,14 +1,25 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 import Draggable from '../Draggable';
-import badgesData from './badges.json';
+// import badgesData from './badges.json';
 
 const getRandom = () => {
   return Math.floor(Math.random() * 100);
 };
 
 const About = () => {
-  const [badges] = useState(badgesData);
+  const [badges, setBadges] = useState([]);
+
+  useEffect(() => {
+    fetchBadges();
+  }, []);
+
+  const fetchBadges = async () => {
+    // eslint-disable-next-line compat/compat
+    const response = await fetch('/api/badge');
+    const json = await response.json();
+    setBadges(json.badges);
+  };
 
   const random = useMemo(() => getRandom(), []);
 

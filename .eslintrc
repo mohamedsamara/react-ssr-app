@@ -11,7 +11,7 @@
     "es6": true,
     "node": true
   },
-  "plugins": ["prettier", "react", "jsx-a11y", "compat"],
+  "plugins": ["prettier", "react", "react-hooks", "jsx-a11y", "compat"],
   "parser": "babel-eslint",
   "rules": {
     "prettier/prettier": ["error"],
@@ -46,6 +46,8 @@
     "import/no-named-as-default": 0,
     "import/no-unresolved": 2,
     "import/no-webpack-loader-syntax": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "react/button-has-type": 0,
     "react/no-array-index-key": 0,
     "react/prop-types": 0,
