@@ -10,6 +10,7 @@ html,
 body {
   min-height: 100vh;
   overflow: auto;
+  font-family: fontFamily;
 }
 
 html {
@@ -93,3 +94,18 @@ a:hover {
     font-size: 20px;
   }
 }
+
+/* scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: theme('colors.blue.500');
+}
+
+::-webkit-scrollbar-track {
+  background: theme('colors.white');
+}
+/* scrollbar styles */

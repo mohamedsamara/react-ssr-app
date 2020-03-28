@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 
 import Draggable from '../Draggable';
 import badgesData from './badges.json';
@@ -10,14 +10,10 @@ const getRandom = () => {
 const About = () => {
   const [badges] = useState(badgesData);
 
-  useEffect(() => {
-    document.body.classList.add('about');
-  }, []);
-
   const random = useMemo(() => getRandom(), []);
 
   return (
-    <div className="relative bg-gray-800 border rounded-lg min-h-300 h-screen overflow-auto">
+    <div className="relative bg-gray-800 border min-h-300 h-screen overflow-auto">
       {badges &&
         badges.map((badge, index) => {
           return (

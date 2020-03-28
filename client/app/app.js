@@ -4,16 +4,14 @@ import { BrowserRouter } from 'react-router-dom';
 
 import Router from './router';
 
-import Application from './components/Application';
-
-// Import application sass styles
-// import './styles/sass/style.scss';
+// Import Tailwind css
+import './styles/css/tailwind.css';
 
 // Import application css styles
 import './styles/css/style.css';
 
-// Import Tailwind css
-import './styles/css/tailwind.css';
+// Import application sass styles
+// import './styles/sass/style.scss';
 
 const App = () => {
   return (

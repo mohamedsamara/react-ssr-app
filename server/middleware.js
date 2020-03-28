@@ -74,9 +74,7 @@ const middleware = app => {
         const context = {};
         const body = renderToString(
           <StaticRouter location={req.originalUrl} context={context}>
-            <Application>
-              <Router />
-            </Application>
+            <Router />
           </StaticRouter>,
         );
 
