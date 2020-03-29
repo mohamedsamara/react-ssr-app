@@ -1,6 +1,6 @@
 /* eslint arrow-body-style: 0, max-len: 0 */
 
-const Template = (body, js, css, meta) => {
+const Template = (body, scripts, styles, pwa, meta) => {
   return `
       <!DOCTYPE html>
       <html lang="en">
@@ -9,20 +9,23 @@ const Template = (body, js, css, meta) => {
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <meta http-equiv="X-UA-Compatible" content="ie=edge" />
           <meta name="robots" content="index,follow">
+          <meta name="apple-mobile-web-app-title" content="React SSR Application">
+          <meta name="apple-mobile-web-app-capable" content="yes">
+          <meta name="apple-mobile-web-app-status-bar-style" content="default">
+          <meta name="theme-color" content="#4a68aa">
+          <link rel="icon" href="/images/favicon.ico" />
+          ${pwa}
           ${meta}
-          <link rel="icon" href="/assets/images/favicon.ico" />
           ${
             process.env.NODE_ENV === 'production'
-              ? "<link rel='manifest' href='/assets/manifest.webmanifest' />"
+              ? "<link rel='manifest' href='/manifest.webmanifest' />"
               : ''
-          } 
-          ${css
-            .map(path => `<link href="${path}" rel="stylesheet"/>`)
-            .join('\n')}
+          }
+          ${styles}
         </head>
         <body>
           <div id="root">${body}</div>
-          ${js.map(path => `<script src="${path}"></script>`).join('\n')} 
+          ${scripts} 
         </body>
       </html>
     `;

@@ -19,7 +19,7 @@ import Template from './views/template';
 import extractChunks from './utils/chunks';
 
 const middleware = app => {
-  app.use('/assets', express.static(path.resolve(__dirname, '../client')));
+  app.use(express.static(path.resolve(__dirname, '../client')));
 
   if (process.env.NODE_ENV === 'development') {
     const compiler = webpack(webpackConfig);
@@ -27,7 +27,6 @@ const middleware = app => {
     app.use(
       webpackMiddleware(compiler, {
         publicPath: webpackConfig.output.publicPath,
-        writeToDisk: true,
         serverSideRender: true,
       }),
     );
@@ -35,7 +34,7 @@ const middleware = app => {
     app.use(webpackHotMiddleware(compiler));
 
     app.get('*', (req, res) => {
-      const [js, css] = extractChunks(
+      const [scripts, styles, pwa] = extractChunks(
         res.locals.webpackStats.toJson().assetsByChunkName,
       );
 
@@ -55,7 +54,7 @@ const middleware = app => {
       res
         .set('Content-Type', 'text/html')
         .status(200)
-        .end(Template(body, js, css, meta));
+        .end(Template(body, scripts, styles, pwa, meta));
     });
   } else {
     (async () => {
@@ -66,7 +65,7 @@ const middleware = app => {
       assets = JSON.parse(JSON.stringify(assets.default));
 
       app.get('*', (req, res) => {
-        const [js, css] = extractChunks(assets);
+        const [scripts, styles, pwa] = extractChunks(assets);
 
         const context = {};
         const body = renderToString(
@@ -84,7 +83,7 @@ const middleware = app => {
         res
           .set('Content-Type', 'text/html')
           .status(200)
-          .end(Template(body, js, css, meta));
+          .end(Template(body, scripts, styles, pwa, meta));
       });
     })();
   }

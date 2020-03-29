@@ -9,6 +9,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 const common = require('./webpack.common');
 
@@ -19,7 +20,7 @@ module.exports = merge(common, {
   output: {
     path: path.join(CURRENT_WORKING_DIR, 'build/client'),
     filename: 'js/[name].[chunkhash].js',
-    publicPath: '/assets/',
+    publicPath: '/',
   },
   devtool: 'source-map',
   module: {
@@ -151,6 +152,21 @@ module.exports = merge(common, {
       hashFunction: 'sha256',
       hashDigest: 'hex',
       hashDigestLength: 20,
+    }),
+    new GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true,
+      swDest: 'sw.js',
+      runtimeCaching: [
+        {
+          urlPattern: new RegExp('.'),
+          handler: 'StaleWhileRevalidate',
+        },
+        {
+          urlPattern: new RegExp('api'),
+          handler: 'NetworkFirst',
+        },
+      ],
     }),
   ],
 });

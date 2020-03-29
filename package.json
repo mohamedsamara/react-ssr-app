@@ -69,6 +69,7 @@
     "postcss-normalize": "^8.0.1",
     "postcss-preset-env": "^6.7.0",
     "prettier": "^1.18.2",
+    "regenerator-runtime": "^0.13.5",
     "rimraf": "^3.0.0",
     "sass-loader": "^8.0.0",
     "serve": "^11.3.0",
@@ -84,10 +85,11 @@
     "webpack-manifest-plugin": "^2.2.0",
     "webpack-merge": "^4.2.2",
     "webpack-node-externals": "^1.7.2",
-    "webpack-pwa-manifest": "^4.1.1"
+    "webpack-pwa-manifest": "^4.1.1",
+    "workbox-webpack-plugin": "^5.1.2"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.19.2",
     "dotenv": "^8.2.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",

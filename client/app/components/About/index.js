@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 
+import axios from 'axios';
+
 import Draggable from '../Draggable';
 // import badgesData from './badges.json';
 
@@ -15,10 +17,8 @@ const About = () => {
   }, []);
 
   const fetchBadges = async () => {
-    // eslint-disable-next-line compat/compat
-    const response = await fetch('/api/badge');
-    const json = await response.json();
-    setBadges(json.badges);
+    const response = await axios('/api/badge');
+    setBadges(response.data.badges);
   };
 
   const random = useMemo(() => getRandom(), []);

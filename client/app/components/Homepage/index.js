@@ -8,7 +8,7 @@ const Homepage = () => {
       <Head title="Homepage" description="Homepage, Landing Page" />
       <img
         className="bg-img"
-        src="/assets/images/background.svg"
+        src="/images/background.svg"
         alt="homepage background"
       />
     </div>

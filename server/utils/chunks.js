@@ -15,11 +15,29 @@ const extractChunks = chunks => {
     js = js.map(path => `/${path}`);
   }
 
+  const scripts = js.map(path => `<script src="${path}"></script>`).join('');
+
+  const pwa = assets.filter(path => path.indexOf('/images/icon') !== -1);
+
+  const pwaLinks = pwa
+    .map(
+      path =>
+        `<link rel="apple-touch-icon" sizes="${path.substring(
+          path.indexOf('_') + 1,
+          path.indexOf('.'),
+        )}" href="${path}" />`,
+    )
+    .join('');
+
   const css = assets.filter(
     path => String(path.split('.').pop()).toLowerCase() === 'css',
   );
 
-  return [js, css];
+  const styles = css
+    .map(path => `<link href="${path}" rel="stylesheet" />`)
+    .join('');
+
+  return [scripts, styles, pwaLinks];
 };
 
 export default extractChunks;
