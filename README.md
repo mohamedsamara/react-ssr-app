@@ -2,7 +2,7 @@
 
 ## Description
 
-This project provides a minimum setup template for server side rendering. There are three important implementations in this project:
+This project provides a minimum setup template for react server side rendering. There are three important implementations in this project:
 
 1. Server Side Rendering (SSR)
 2. Single Page Application (SPA)
