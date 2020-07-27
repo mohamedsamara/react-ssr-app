@@ -23,35 +23,30 @@ Some basic Git commands are:
 $ git clone https://github.com/mohamedsamara/react-ssr-app.git
 $ cd project
 $ npm install
-
 ```
 
 ## Simple build for production
 
 ```
 $ npm run production
-
 ```
 
 ## Run the application for development
 
 ```
 $ npm start
-
 ```
 
 ## Run the application for production
 
 ```
 $ npm run start:production
-
 ```
 
 ## Run the code linter
 
 ```
 $ npm run lint:fix
-
 ```
 
 ## Languages & tools
